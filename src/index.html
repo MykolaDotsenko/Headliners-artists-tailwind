@@ -6,6 +6,18 @@
     <link href="./output.css" rel="stylesheet" />
     <script defer src="./assets/fontawesome/js/fontawesome.min.js"></script>
     <script defer src="./assets/fontawesome/js/solid.min.js"></script>
+    <script>
+      window.onload = () => {
+        const mobileMenuIcon = document.getElementById("mobile-menu-button");
+        mobileMenuIcon.addEventListener("click", () => {
+          if(mobileMenuIcon.classList.contains("open")) {
+            mobileMenuIcon.classList.remove("open");
+          } else {
+            mobileMenuIcon.classList.add("open");
+          }
+        });
+      }
+    </script>
   </head>
   <body>
     <main>
@@ -19,7 +31,14 @@
               tw:<span class="text-sky-900">mf</span>
             </div>
           </div>
-          <div class="flex-1 flex items-center justify-end">
+          <div class="block md:hidden ml-auto pr-4 my-auto cursor-pointer">
+            <button id="mobile-menu-button" class="group peer">
+              <div class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:rotate-45 transition-all group-open:top-2 relative"></div>
+              <div class="transition-all opacity-100 group-open:opacity-0 bg-zinc-200 rounded-full w-8 h-1 mt-1"></div>
+              <div class="top-0 transition-all bg-zinc-200 rounded-full w-8 h-1 mt-1 group-open:rotate-45 group-open:-top-2 relative"></div>
+            </button>
+          </div>
+          <div class="hidden flex-1 md:flex items-center justify-end">
             <div class="menu-item">
               <span>Home</span>
             </div>
@@ -31,10 +50,14 @@
               <div
                 class="group-hover:block hidden bg-pink-500 absolute top-full right-0 whitespace-nowrap rounded-b-md text-right"
               >
-                <div class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200">
+                <div
+                  class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200"
+                >
                   <span>Single day ticket</span>
                 </div>
-                <div class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200">
+                <div
+                  class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200"
+                >
                   <span>7 day ticket</span>
                 </div>
               </div>

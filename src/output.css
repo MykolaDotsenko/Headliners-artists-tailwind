@@ -800,3 +800,9 @@ html {
 .group:hover .group-hover\:hidden{
   display: none;
 }
+
+@media (min-width: 768px){
+  .md\:flex{
+    display: flex;
+  }
+}
