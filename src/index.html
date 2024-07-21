@@ -25,6 +25,21 @@
             ticketsMenuItem.classList.add("open");
           }
         });
+
+const previousButton = document.getElementById('previous')
+const nextButton = document.getElementById('next')
+const carousel = document.getElementById('carousel')
+
+previousButton.addEventListener('click', ()=>{
+  const itemWidth = carousel.getElementsByTagName('div')[0].clientWidth
+  carousel.scrollLeft = carousel.scrollLeft - itemWidth
+})
+
+nextButton.addEventListener('click', ()=>{
+  const itemWidth = carousel.getElementsByTagName('div')[0].clientWidth
+  carousel.scrollLeft = carousel.scrollLeft + itemWidth
+})
+
       };
     </script>
   </head>
@@ -42,30 +57,47 @@
           </div>
           <div class="block md:hidden ml-auto pr-4 my-auto cursor-pointer">
             <div id="mobile-menu-button" class="group peer cursor-pointer">
-              <div class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:rotate-45 transition-all group-open:top-2 relative"></div>
-                        <div class="bg-zinc-200 rounded-full w-8 h-1 my-1 opacity-100 group-open:opacity-0 transition-all"></div>
-                        <div class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:-rotate-45 transition-all group-open:-top-2 relative"></div>
+              <div
+                class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:rotate-45 transition-all group-open:top-2 relative"
+              ></div>
+              <div
+                class="bg-zinc-200 rounded-full w-8 h-1 my-1 opacity-100 group-open:opacity-0 transition-all"
+              ></div>
+              <div
+                class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:-rotate-45 transition-all group-open:-top-2 relative"
+              ></div>
             </div>
             <div
               class="peer-open:block hidden absolute bg-gradient-to-r from-rose-500 to-pink-500 w-full left-0 top-[62px]"
             >
-              <div class="relative flex h-full cursor-pointer items-center justify-center p-4 font-bold text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10">
+              <div
+                class="relative flex h-full cursor-pointer items-center justify-center p-4 font-bold text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10"
+              >
                 <span>Home</span>
               </div>
-              <div class="relative flex h-full cursor-pointer items-center justify-center p-4 font-bold text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10">
+              <div
+                class="relative flex h-full cursor-pointer items-center justify-center p-4 font-bold text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10"
+              >
                 <span>Lineup</span>
               </div>
-               <div id="ticket-menu-item" class="relative h-full cursor-pointer text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10 group">
-                            <div class="p-4 text-center font-bold">Tickets</div>
-                            <div class="hidden group-open:block">
-                                <div class="relative text-center p-4 text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out">
-                                    <span>Single day ticket</span>
-                                </div>
-                                <div class="relative text-center p-4 text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out">
-                                    <span>7 days ticket</span>
-                                </div>
-                            </div>
-                        </div>
+              <div
+                id="ticket-menu-item"
+                class="relative h-full cursor-pointer text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10 group"
+              >
+                <div class="p-4 text-center font-bold">Tickets</div>
+                <div class="hidden group-open:block">
+                  <div
+                    class="relative text-center p-4 text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out"
+                  >
+                    <span>Single day ticket</span>
+                  </div>
+                  <div
+                    class="relative text-center p-4 text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out"
+                  >
+                    <span>7 days ticket</span>
+                  </div>
+                </div>
+              </div>
               <div
                 class="relative flex cursor-pointer items-center justify-center p-4 font-bold text-pink-200 transition-colors ease-in-out hover:bg-white/10 hover:text-zinc-200"
               >
@@ -80,47 +112,162 @@
             <div class="menu-item">
               <span>Lineup</span>
             </div>
-             <div class="menu-item group">
-                        <span>Tickets</span>
-                        <div class="hidden group-hover:block absolute top-full right-0 whitespace-nowrap bg-pink-500 rounded-b-md text-right">
-                            <div class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200">
-                                <span>Single day ticket</span>
-                            </div>
-                        
-                            <div class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200">
-                                <span>7 days ticket</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-item">
+            <div class="menu-item group">
+              <span>Tickets</span>
+              <div
+                class="hidden group-hover:block absolute top-full right-0 whitespace-nowrap bg-pink-500 rounded-b-md text-right"
+              >
+                <div
+                  class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200"
+                >
+                  <span>Single day ticket</span>
+                </div>
+
+                <div
+                  class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200"
+                >
+                  <span>7 days ticket</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
               <span>Support</span>
             </div>
           </div>
         </nav>
-        <div 
-        style="background-image: url('./assets/images/hero.jpg')"
-        class="bg-cover bg-center bg-fixed flex flex-col items-center justify-center h-[calc(100vh-200px)] min-h-[400px]"> 
-<div class="bg-white/30 py-2 px-4 rounded-xl text-center backdrop-blur-md">
-<div class="relative">
-<img src="./assets/images/logo.png" width="175"/>
-</div>
-<div class="text-5xl font-bold">
-tw:<span class="text-sky-900">mf</span>
-</div>
+        <div
+          style="background-image: url('./assets/images/hero.jpg')"
+          class="bg-cover bg-center bg-fixed flex flex-col items-center justify-center h-[calc(100vh-200px)] min-h-[400px]"
+        >
+          <div
+            class="bg-white/30 py-2 px-4 rounded-xl text-center backdrop-blur-md"
+          >
+            <div class="relative">
+              <img src="./assets/images/logo.png" width="175" />
+              <div class="item-center flex justify-center mt-[-70px] mb-5">
+                <div
+                  class="bg-pink-500 w-14 h-14 rounded-full flex items-center justify-center gap-1"
+                >
+                  <div
+                    class="h-2 w-1 bg-pink-300 rounded-full animate-wavey"
+                  ></div>
+                  <div
+                    class="h-3 w-1 bg-pink-200 rounded-full animate-wavey animation-delay-200"
+                  ></div>
+                  <div
+                    class="h-4 w-1 bg-pink-100 rounded-full animate-wavey animation-delay-[150ms]"
+                  ></div>
+                  <div
+                    class="h-3 w-1 bg-pink-200 rounded-full animate-wavey animation-delay-300"
+                  ></div>
+                  <div
+                    class="h-2 w-1 bg-pink-300 rounded-full animate-wavey animation-delay-[75ms]"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-5xl font-bold">
+              tw:<span class="text-sky-900">mf</span>
+            </div>
+          </div>
 
-</div>
-
-<div class="font-bold mt-3 text-sm">
-  Keep me updated with news and promotions
-</div>
-<form class="mt-3 flex gap-2">
-  <input type="email" placeholder="Email" class="rounded-sm border border-white/40 bg-white/30 backdrop-blur-md p-2 font-bold text-sky-900 placeholder-zinc-500 caret-pink-500 outline-pink-500 focus:outline"/>
-<button type="submit" class="cursor-pointer rounded-sm bg-pink-500 py-2 px-4 font-bold transition-colors hover:bg-sky-900 hover:shadow-lg hover:shadow-black/20">
-  Subscribe
-</button>
-</form>
+          <div class="font-bold mt-3 text-sm">
+            Keep me updated with news and promotions
+          </div>
+          <form class="mt-3 flex gap-2">
+            <input
+              type="email"
+              placeholder="Email"
+              class="rounded-sm border border-white/40 bg-white/30 backdrop-blur-md p-2 font-bold text-sky-900 placeholder-zinc-500 caret-pink-500 outline-pink-500 focus:outline"
+            />
+            <button
+              type="submit"
+              class="cursor-pointer rounded-sm bg-pink-500 py-2 px-4 font-bold transition-colors hover:bg-sky-900 hover:shadow-lg hover:shadow-black/20"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
       </header>
+      <div class="max-w-screen-lg mx-auto mt-20">
+        <h2 class="text-5xl">Headliners</h2>
+        <p>
+          Expirience the sonic delight from these made-up artists
+        </p>
+        <div class="flex">
+          <div id="previous" class="text-5xl flex justify-center items-center cursor-pointer p-2 relative -top-8">
+            <i class="fas fa-angle-left"></i>
+          </div>
+          <div> <div id="carousel" class="scroll-smooth flex-1 mt-4 flex w-full gap-4 pb-5 snap-x overflow-x-auto">
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band1.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+  
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band2.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+  
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band3.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+  
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band4.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+  
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band5.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+  
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band6.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+  
+            <div class="min-w-[80%] md:min-w-[40%]">
+              <div
+                style="background-image: url('./assets/images/band7.jpg')"
+                class="h-80 w-full snap-center rounded-xl bg-cover bg-center shadow-md shadow-black/20"
+              ></div>
+              <h5 class="mt-2">Cordoroy Gary</h5>
+              <h6>1st Julay 9pm - Main Stage</h6>
+            </div>
+          </div></div>
+          <div id="next" class="text-5xl flex justify-center items-center cursor-pointer p-2 relative -top-8">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </div>
+       
+      </div>
     </main>
   </body>
 </html>
