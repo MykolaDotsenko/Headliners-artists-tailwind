@@ -41,17 +41,11 @@
             </div>
           </div>
           <div class="block md:hidden ml-auto pr-4 my-auto cursor-pointer">
-            <button id="mobile-menu-button" class="group peer">
-              <div
-                class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:rotate-45 transition-all group-open:top-2 relative"
-              ></div>
-              <div
-                class="transition-all opacity-100 group-open:opacity-0 bg-zinc-200 rounded-full w-8 h-1 mt-1"
-              ></div>
-              <div
-                class="top-0 transition-all bg-zinc-200 rounded-full w-8 h-1 mt-1 group-open:rotate-45 group-open:-top-2 relative"
-              ></div>
-            </button>
+            <div id="mobile-menu-button" class="group peer cursor-pointer">
+              <div class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:rotate-45 transition-all group-open:top-2 relative"></div>
+                        <div class="bg-zinc-200 rounded-full w-8 h-1 my-1 opacity-100 group-open:opacity-0 transition-all"></div>
+                        <div class="top-0 bg-zinc-200 rounded-full w-8 h-1 group-open:-rotate-45 transition-all group-open:-top-2 relative"></div>
+            </div>
             <div
               class="peer-open:block hidden absolute bg-gradient-to-r from-rose-500 to-pink-500 w-full left-0 top-[62px]"
             >
@@ -61,18 +55,20 @@
               <div class="relative flex h-full cursor-pointer items-center justify-center p-4 font-bold text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10">
                 <span>Lineup</span>
               </div>
-              <div id="ticket-menu-item" class="group relative h-full cursor-pointer  text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10">
-                <div class="p-4 text-center font-bold">Tickets</div>
-                <div class="hidden group-open:block">
-                  <div class="text-center p-4 relative text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out">
-                    <span>Single day ticket</span>
-                  </div>
-                  <div class="text-center p-4 relative text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out">
-                    <span>7 day ticket</span>
-                  </div>
-                </div>
-              </div>
-              <div class="relative flex h-full cursor-pointer items-center justify-center p-4 font-bold text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10">
+               <div id="ticket-menu-item" class="relative h-full cursor-pointer text-pink-200 hover:text-zinc-200 transition-colors hover:bg-white/10 group">
+                            <div class="p-4 text-center font-bold">Tickets</div>
+                            <div class="hidden group-open:block">
+                                <div class="relative text-center p-4 text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out">
+                                    <span>Single day ticket</span>
+                                </div>
+                                <div class="relative text-center p-4 text-pink-200 hover:text-zinc-200 hover:bg-white/5 transition-colors ease-in-out">
+                                    <span>7 days ticket</span>
+                                </div>
+                            </div>
+                        </div>
+              <div
+                class="relative flex cursor-pointer items-center justify-center p-4 font-bold text-pink-200 transition-colors ease-in-out hover:bg-white/10 hover:text-zinc-200"
+              >
                 <span>Support</span>
               </div>
             </div>
@@ -84,28 +80,46 @@
             <div class="menu-item">
               <span>Lineup</span>
             </div>
-            <div class="menu-item group">
-              <span>Tickets</span>
-              <div
-                class="group-hover:block hidden bg-pink-500 absolute top-full right-0 whitespace-nowrap rounded-b-md text-right"
-              >
-                <div
-                  class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200"
-                >
-                  <span>Single day ticket</span>
-                </div>
-                <div
-                  class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200"
-                >
-                  <span>7 day ticket</span>
-                </div>
-              </div>
-            </div>
-            <div class="menu-item">
+             <div class="menu-item group">
+                        <span>Tickets</span>
+                        <div class="hidden group-hover:block absolute top-full right-0 whitespace-nowrap bg-pink-500 rounded-b-md text-right">
+                            <div class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200">
+                                <span>Single day ticket</span>
+                            </div>
+                        
+                            <div class="p-4 font-bold hover:bg-white/5 hover:text-zinc-200 transition-colors ease-in-out cursor-pointer text-pink-200">
+                                <span>7 days ticket</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
               <span>Support</span>
             </div>
           </div>
         </nav>
+        <div 
+        style="background-image: url('./assets/images/hero.jpg')"
+        class="bg-cover bg-center bg-fixed flex flex-col items-center justify-center h-[calc(100vh-200px)] min-h-[400px]"> 
+<div class="bg-white/30 py-2 px-4 rounded-xl text-center backdrop-blur-md">
+<div class="relative">
+<img src="./assets/images/logo.png" width="175"/>
+</div>
+<div class="text-5xl font-bold">
+tw:<span class="text-sky-900">mf</span>
+</div>
+
+</div>
+
+<div class="font-bold mt-3 text-sm">
+  Keep me updated with news and promotions
+</div>
+<form class="mt-3 flex gap-2">
+  <input type="email" placeholder="Email" class="rounded-sm border border-white/40 bg-white/30 backdrop-blur-md p-2 font-bold text-sky-900 placeholder-zinc-500 caret-pink-500 outline-pink-500 focus:outline"/>
+<button type="submit" class="cursor-pointer rounded-sm bg-pink-500 py-2 px-4 font-bold transition-colors hover:bg-sky-900 hover:shadow-lg hover:shadow-black/20">
+  Subscribe
+</button>
+</form>
+        </div>
       </header>
     </main>
   </body>
