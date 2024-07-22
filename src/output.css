@@ -831,6 +831,17 @@ html {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@keyframes ping{
+  75%, 100%{
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping{
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 @keyframes wavey{
   0%, 100%{
     transform: scaleY(0.5);
@@ -843,17 +854,6 @@ html {
 
 .animate-wavey{
   animation: wavey 1000ms linear infinite;
-}
-
-@keyframes ping{
-  75%, 100%{
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-.animate-ping{
-  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 .cursor-pointer{
@@ -1011,6 +1011,10 @@ html {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
+.bg-gradient-to-t{
+  background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+
 .from-rose-500{
   --tw-gradient-from: #f43f5e var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(244 63 94 / 0) var(--tw-gradient-to-position);
@@ -1023,9 +1027,20 @@ html {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-cyan-500{
+  --tw-gradient-from: #06b6d4 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(6 182 212 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .via-cyan-900{
   --tw-gradient-to: rgb(22 78 99 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #164e63 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.via-green-500{
+  --tw-gradient-to: rgb(34 197 94 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #22c55e var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
 .to-pink-500{
@@ -1042,6 +1057,11 @@ html {
 
 .bg-fixed{
   background-attachment: fixed;
+}
+
+.bg-clip-text{
+  -webkit-background-clip: text;
+          background-clip: text;
 }
 
 .bg-center{
@@ -1149,6 +1169,10 @@ html {
   color: rgb(24 24 27 / var(--tw-text-opacity));
 }
 
+.text-transparent{
+  color: transparent;
+}
+
 .underline{
   text-decoration-line: underline;
 }
@@ -1169,10 +1193,6 @@ html {
 
 .opacity-100{
   opacity: 1;
-}
-
-.opacity-45{
-  opacity: 0.45;
 }
 
 .opacity-75{

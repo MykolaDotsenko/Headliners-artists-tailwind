@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.4"
+  },
+  "dependencies": {
+    "@check-light-or-dark/color": "^1.0.3"
   }
 }
