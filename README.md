@@ -1,7 +1,7 @@
 🎵 Headliners — Music Festival Landing Page
 A modern, responsive landing page for a music festival, built with Tailwind CSS and vanilla JavaScript. Designed to showcase artists, event details, and ticket options with smooth animations and a clean UI.
 
-👉 Live Demo:
+👉 Live Demo: https://mykoladotsenko.github.io/Headliners-artists-tailwind/src/
 
 🚀 Key Features
 ✔ Fully Responsive – Works on mobile, tablet & desktop
