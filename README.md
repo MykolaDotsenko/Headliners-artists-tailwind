@@ -2,7 +2,7 @@
 
 A production-minded **festival campaign experience** built with semantic HTML, authored CSS, progressive JavaScript, responsive media, and automated browser-quality gates.
 
-**Live demo:** https://mykoladotsenko.github.io/Headliners-artists-tailwind/src/
+**Live demo:** https://mykoladotsenko.github.io/Headliners/src/
 
 > Headliners is a fictional festival concept and engineering case study. It does not sell tickets, process payments, or collect newsletter data.
 
