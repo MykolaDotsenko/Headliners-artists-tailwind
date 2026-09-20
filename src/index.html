@@ -78,6 +78,41 @@
 
     <main id="main-content">
       <section class="hero" id="home" aria-labelledby="hero-title">
+        <picture class="hero-media" aria-hidden="true">
+          <source
+            type="image/avif"
+            srcset="
+              ./assets/optimized/hero-960.avif 960w,
+              ./assets/optimized/hero-1600.avif 1600w,
+              ./assets/optimized/hero-2200.avif 2200w
+            "
+            sizes="100vw"
+          />
+          <source
+            type="image/webp"
+            srcset="
+              ./assets/optimized/hero-960.webp 960w,
+              ./assets/optimized/hero-1600.webp 1600w,
+              ./assets/optimized/hero-2200.webp 2200w
+            "
+            sizes="100vw"
+          />
+          <img
+            src="./assets/optimized/hero-1600.jpg"
+            srcset="
+              ./assets/optimized/hero-960.jpg 960w,
+              ./assets/optimized/hero-1600.jpg 1600w,
+              ./assets/optimized/hero-2200.jpg 2200w
+            "
+            sizes="100vw"
+            width="2200"
+            height="1467"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+        <div class="hero-scrim" aria-hidden="true"></div>
         <div class="hero-content">
           <p class="eyebrow">Concept festival · 1–7 July · Harbor District</p>
           <h1 id="hero-title">Seven nights.<br />One citywide pulse.</h1>
@@ -134,7 +169,37 @@
 
         <div class="artist-carousel" id="carousel" tabindex="0" aria-label="Featured artists">
           <article class="artist-card">
-            <img src="./assets/images/band2.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band2-480.avif 480w,
+                  ./assets/optimized/band2-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band2-480.webp 480w,
+                  ./assets/optimized/band2-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band2-960.jpg"
+                srcset="
+                  ./assets/optimized/band2-480.jpg 480w,
+                  ./assets/optimized/band2-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">1 July · 21:00 · Main Stage</p>
               <h3>Corduroy Gary</h3>
@@ -143,7 +208,37 @@
           </article>
 
           <article class="artist-card">
-            <img src="./assets/images/band3.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band3-480.avif 480w,
+                  ./assets/optimized/band3-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band3-480.webp 480w,
+                  ./assets/optimized/band3-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band3-960.jpg"
+                srcset="
+                  ./assets/optimized/band3-480.jpg 480w,
+                  ./assets/optimized/band3-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">2 July · 20:30 · Harbor Stage</p>
               <h3>Neon Harbor</h3>
@@ -152,7 +247,37 @@
           </article>
 
           <article class="artist-card">
-            <img src="./assets/images/band4.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band4-480.avif 480w,
+                  ./assets/optimized/band4-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band4-480.webp 480w,
+                  ./assets/optimized/band4-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band4-960.jpg"
+                srcset="
+                  ./assets/optimized/band4-480.jpg 480w,
+                  ./assets/optimized/band4-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">3 July · 22:15 · Main Stage</p>
               <h3>Glass Atlas</h3>
@@ -161,7 +286,37 @@
           </article>
 
           <article class="artist-card">
-            <img src="./assets/images/band5.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band5-480.avif 480w,
+                  ./assets/optimized/band5-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band5-480.webp 480w,
+                  ./assets/optimized/band5-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band5-960.jpg"
+                srcset="
+                  ./assets/optimized/band5-480.jpg 480w,
+                  ./assets/optimized/band5-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">4 July · 19:45 · Harbor Stage</p>
               <h3>Luma Echo</h3>
@@ -170,7 +325,37 @@
           </article>
 
           <article class="artist-card">
-            <img src="./assets/images/band6.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band6-480.avif 480w,
+                  ./assets/optimized/band6-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band6-480.webp 480w,
+                  ./assets/optimized/band6-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band6-960.jpg"
+                srcset="
+                  ./assets/optimized/band6-480.jpg 480w,
+                  ./assets/optimized/band6-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">5 July · 21:30 · Main Stage</p>
               <h3>Static Bloom</h3>
@@ -179,7 +364,37 @@
           </article>
 
           <article class="artist-card">
-            <img src="./assets/images/band7.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band7-480.avif 480w,
+                  ./assets/optimized/band7-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band7-480.webp 480w,
+                  ./assets/optimized/band7-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band7-960.jpg"
+                srcset="
+                  ./assets/optimized/band7-480.jpg 480w,
+                  ./assets/optimized/band7-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">6 July · 20:00 · Harbor Stage</p>
               <h3>Velvet North</h3>
@@ -188,7 +403,37 @@
           </article>
 
           <article class="artist-card">
-            <img src="./assets/images/band1.jpg" width="720" height="480" alt="" loading="lazy" decoding="async" />
+            <picture class="artist-card__media">
+              <source
+                type="image/avif"
+                srcset="
+                  ./assets/optimized/band1-480.avif 480w,
+                  ./assets/optimized/band1-960.avif 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <source
+                type="image/webp"
+                srcset="
+                  ./assets/optimized/band1-480.webp 480w,
+                  ./assets/optimized/band1-960.webp 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+              />
+              <img
+                src="./assets/optimized/band1-960.jpg"
+                srcset="
+                  ./assets/optimized/band1-480.jpg 480w,
+                  ./assets/optimized/band1-960.jpg 960w
+                "
+                sizes="(max-width: 520px) 88vw, 28rem"
+                width="960"
+                height="640"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div class="artist-card__body">
               <p class="artist-card__meta">7 July · 22:00 · Main Stage</p>
               <h3>Sunday Circuit</h3>
