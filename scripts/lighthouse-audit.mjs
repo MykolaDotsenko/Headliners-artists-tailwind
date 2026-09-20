@@ -98,7 +98,7 @@ const requireBudget = (condition, message) => {
 
 requireBudget(representative.performance >= 0.95, "Performance must be >= 95.");
 requireBudget(representative.accessibility === 1, "Accessibility must be 100.");
-requireBudget(representative.bestPractices >= 0.95, "Best Practices must be >= 95.");
+requireBudget(representative.bestPractices === 1, "Best Practices must be 100.");
 requireBudget(representative.seo === 1, "SEO must be 100.");
 requireBudget(representative.lcp <= 2500, "LCP must be <= 2.5s.");
 requireBudget(representative.cls <= 0.1, "CLS must be <= 0.10.");
@@ -110,7 +110,7 @@ const summary = {
   budgets: {
     performance: ">= 95",
     accessibility: "100",
-    bestPractices: ">= 95",
+    bestPractices: "100",
     seo: "100",
     lcpMs: "<= 2500",
     cls: "<= 0.10",
