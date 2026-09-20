@@ -8,3 +8,8 @@ coverage/
 !.env.example
 .idea/
 .vscode/
+
+artifacts/
+playwright-report/
+test-results/
+.lighthouseci/
