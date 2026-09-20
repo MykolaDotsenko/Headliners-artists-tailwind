@@ -1,29 +1,9 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
-  darkMode: 'class',
-  content: ["./src/**/*.{html,js}"],
-
+  darkMode: "class",
+  content: ["./src/**/*.{html,js,mjs}"],
   theme: {
-    extend: {
-      keyframes: {
-        wavey: {
-          "0%, 100%": {
-            transform: "scaleY(0.5)",
-          },
-          "50%": {
-            transform: "scaleY(1.5)",
-          },
-        },
-      },
-      animation: {
-        wavey: "wavey 1000ms linear infinite",
-      },
-    },
+    extend: {},
   },
-  plugins: [
-    require("./plugins/openVariant"),
-    require("./plugins/animationDelay"),
-    require("./plugins/tableCaption"),
-    
-  ],
+  plugins: [],
 };
