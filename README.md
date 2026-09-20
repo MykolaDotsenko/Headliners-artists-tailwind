@@ -55,7 +55,7 @@ The CI pipeline fails when the representative Lighthouse run falls below:
 | --- | ---: |
 | Performance | ≥ 95 |
 | Accessibility | 100 |
-| Best Practices | ≥ 95 |
+| Best Practices | 100 |
 | SEO | 100 |
 | LCP | ≤ 2.5 s |
 | CLS | ≤ 0.10 |
