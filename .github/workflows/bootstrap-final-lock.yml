@@ -1,0 +1,39 @@
+name: Bootstrap final lock
+
+on:
+  push:
+    branches:
+      - refactor/recruiter-grade-headliners
+
+permissions:
+  contents: write
+
+jobs:
+  lockfile:
+    if: "!contains(github.event.head_commit.message, 'lock final quality toolchain')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Resolve final pinned quality dependencies
+        run: |
+          npm pkg delete "devDependencies.@lhci/cli"
+          npm pkg delete "devDependencies.tailwindcss"
+          npm pkg set "devDependencies.lighthouse=13.5.0"
+          npm install --package-lock-only --ignore-scripts
+
+      - name: Commit generated lockfile only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "chore: lock final quality toolchain [skip ci]"
+          git push
