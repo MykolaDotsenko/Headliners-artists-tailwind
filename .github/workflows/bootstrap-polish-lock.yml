@@ -1,0 +1,38 @@
+name: Bootstrap polish lock
+
+on:
+  push:
+    branches:
+      - refactor/recruiter-grade-headliners
+
+permissions:
+  contents: read
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Add pinned quality tooling to working package metadata
+        run: |
+          npm pkg set "devDependencies.@playwright/test=1.63.0"
+          npm pkg set "devDependencies.@axe-core/playwright=4.13.0"
+          npm pkg set "devDependencies.@lhci/cli=0.15.1"
+          npm pkg set "devDependencies.sharp=0.35.4"
+
+      - name: Resolve deterministic lockfile
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Upload generated lockfile
+        uses: actions/upload-artifact@v6
+        with:
+          name: polish-lock
+          path: package-lock.json
+          if-no-files-found: error
