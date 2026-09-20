@@ -40,6 +40,7 @@ function storeTheme(theme) {
 
 function applyTheme(theme, toggle) {
   const isDark = theme === "dark";
+  const themeColor = document.querySelector('meta[name="theme-color"]');
 
   document.documentElement.classList.toggle("dark", isDark);
   toggle.setAttribute("aria-pressed", String(isDark));
@@ -47,6 +48,10 @@ function applyTheme(theme, toggle) {
     "aria-label",
     isDark ? "Switch to light theme" : "Switch to dark theme",
   );
+
+  if (themeColor instanceof HTMLMetaElement) {
+    themeColor.content = isDark ? "#09090b" : "#f4f4f5";
+  }
 }
 
 function setupTheme() {
@@ -56,8 +61,8 @@ function setupTheme() {
     return;
   }
 
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  let theme = resolveInitialTheme(readStoredTheme(), prefersDark);
+  const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+  let theme = resolveInitialTheme(readStoredTheme(), colorScheme.matches);
 
   applyTheme(theme, toggle);
 
@@ -65,6 +70,15 @@ function setupTheme() {
     theme = oppositeTheme(theme);
     applyTheme(theme, toggle);
     storeTheme(theme);
+  });
+
+  colorScheme.addEventListener("change", (event) => {
+    if (readStoredTheme() !== null) {
+      return;
+    }
+
+    theme = event.matches ? "dark" : "light";
+    applyTheme(theme, toggle);
   });
 }
 
