@@ -85,12 +85,20 @@ check(
   "axe Playwright integration must remain pinned.",
 );
 check(
-  packageJson.devDependencies?.["@lhci/cli"] === "0.15.1",
-  "Lighthouse CI must remain pinned.",
+  packageJson.devDependencies?.lighthouse === "13.5.0",
+  "Lighthouse must remain pinned for reproducible performance audits.",
 );
 check(
   packageJson.devDependencies?.sharp === "0.35.4",
   "Sharp must remain pinned for deterministic image tooling.",
+);
+check(
+  !packageJson.devDependencies?.tailwindcss,
+  "Unused Tailwind tooling must not return to the authored-CSS build.",
+);
+check(
+  !packageJson.devDependencies?.["@lhci/cli"],
+  "The obsolete LHCI wrapper must not return to the direct Lighthouse gate.",
 );
 
 if (failures.length > 0) {
