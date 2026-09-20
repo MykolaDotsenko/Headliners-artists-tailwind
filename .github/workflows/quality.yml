@@ -15,9 +15,9 @@ concurrency:
 
 jobs:
   verify:
-    name: Node 22 · tests · repository audit · Tailwind build
+    name: Node 22 · unit · browser · a11y · Lighthouse
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -32,6 +32,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Build responsive image assets
+        run: npm run assets:build
+
       - name: Run unit tests
         run: npm test
 
@@ -41,5 +44,29 @@ jobs:
       - name: Verify Tailwind can build from source
         run: npm run build:verify
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run cross-browser interaction and accessibility tests
+        run: npm run test:browser
+
+      - name: Capture deterministic portfolio screenshots
+        run: npm run screenshots
+
+      - name: Enforce Lighthouse budgets
+        run: npm run lighthouse
+
       - name: Audit production dependency surface
         run: npm audit --omit=dev --audit-level=high
+
+      - name: Upload browser and performance evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: frontend-quality-evidence
+          if-no-files-found: warn
+          path: |
+            artifacts/
+            playwright-report/
+            test-results/
+          retention-days: 30
