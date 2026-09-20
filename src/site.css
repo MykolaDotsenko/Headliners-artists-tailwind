@@ -7,8 +7,9 @@
   --text: #18181b;
   --muted: #52525b;
   --border: rgba(24, 24, 27, 0.14);
-  --accent: #ec4899;
-  --accent-strong: #be185d;
+  --accent: #9d174d;
+  --accent-button: #9d174d;
+  --accent-button-hover: #831843;
   --accent-soft: #fce7f3;
   --focus: #0284c7;
   --shadow: 0 24px 70px rgba(24, 24, 27, 0.12);
@@ -23,6 +24,9 @@ html.dark {
   --text: #f4f4f5;
   --muted: #a1a1aa;
   --border: rgba(244, 244, 245, 0.14);
+  --accent: #f9a8d4;
+  --accent-button: #9d174d;
+  --accent-button-hover: #be185d;
   --accent-soft: rgba(236, 72, 153, 0.14);
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
 }
@@ -277,11 +281,15 @@ html.dark .theme-icon--moon {
 
 .eyebrow {
   margin: 0 0 0.75rem;
-  color: #f9a8d4;
+  color: var(--accent);
   font-size: 0.78rem;
   font-weight: 850;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: #fbcfe8;
 }
 
 .hero h1 {
@@ -330,13 +338,13 @@ html.dark .theme-icon--moon {
 }
 
 .button--primary {
-  background: var(--accent);
+  background: var(--accent-button);
   color: white;
-  box-shadow: 0 12px 28px rgba(236, 72, 153, 0.24);
+  box-shadow: 0 12px 28px rgba(157, 23, 77, 0.28);
 }
 
 .button--primary:hover {
-  background: var(--accent-strong);
+  background: var(--accent-button-hover);
 }
 
 .button--secondary {
