@@ -76,6 +76,22 @@ check(
   !packageJson.dependencies || Object.keys(packageJson.dependencies).length === 0,
   "Static site must not ship unused runtime dependencies.",
 );
+check(
+  packageJson.devDependencies?.["@playwright/test"] === "1.63.0",
+  "Playwright must remain pinned for reproducible cross-browser QA.",
+);
+check(
+  packageJson.devDependencies?.["@axe-core/playwright"] === "4.13.0",
+  "axe Playwright integration must remain pinned.",
+);
+check(
+  packageJson.devDependencies?.["@lhci/cli"] === "0.15.1",
+  "Lighthouse CI must remain pinned.",
+);
+check(
+  packageJson.devDependencies?.sharp === "0.35.4",
+  "Sharp must remain pinned for deterministic image tooling.",
+);
 
 if (failures.length > 0) {
   console.error("\nQuality audit failed:\n");
