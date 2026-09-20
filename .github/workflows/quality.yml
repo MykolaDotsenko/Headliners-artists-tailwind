@@ -1,0 +1,69 @@
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Node 22 · unit · browser · a11y · Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Build responsive image assets
+        run: npm run assets:build
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Run repository quality audit
+        run: npm run quality
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run cross-browser interaction and accessibility tests
+        run: npm run test:browser
+
+      - name: Capture deterministic portfolio screenshots
+        run: npm run screenshots
+
+      - name: Enforce Lighthouse budgets
+        run: npm run lighthouse
+
+      - name: Audit full development dependency graph
+        run: npm audit --audit-level=high
+
+      - name: Upload browser and performance evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: frontend-quality-evidence
+          if-no-files-found: warn
+          path: |
+            artifacts/
+            playwright-report/
+            test-results/
+          retention-days: 30

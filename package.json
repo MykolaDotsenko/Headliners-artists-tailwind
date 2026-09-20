@@ -1,18 +1,26 @@
 {
-  "name": "tailwind-course",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "headliners-festival-experience",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Accessible, responsive festival campaign experience built with semantic HTML, authored CSS, and progressive vanilla JavaScript.",
   "scripts": {
-    "tw:build": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "assets:build": "node scripts/build-images.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test",
+    "screenshots": "playwright test e2e/screenshots.spec.mjs --project=chromium",
+    "lighthouse": "node scripts/lighthouse-audit.mjs",
+    "quality": "node scripts/quality.mjs",
+    "check": "npm run test && npm run quality",
+    "check:full": "npm run assets:build && npm run check && npm run test:browser && npm run lighthouse"
   },
-  "author": "",
-  "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
   "devDependencies": {
-    "tailwindcss": "^3.4.4"
-  },
-  "dependencies": {
-    "@check-light-or-dark/color": "^1.0.3"
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
+    "lighthouse": "13.5.0",
+    "sharp": "0.35.4"
   }
 }
