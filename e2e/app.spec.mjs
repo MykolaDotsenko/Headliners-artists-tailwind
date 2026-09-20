@@ -9,12 +9,15 @@ test("core content and responsive images render without broken media", async ({ 
   await expect(page.getByRole("navigation", { name: "Primary navigation" })).toBeVisible();
 
   await page.waitForLoadState("networkidle");
-  const brokenImages = await page.locator("img").evaluateAll((images) =>
-    images
-      .filter((image) => !image.complete || image.naturalWidth === 0)
-      .map((image) => image.currentSrc || image.src),
-  );
-  expect(brokenImages).toEqual([]);
+  const images = page.locator("img");
+
+  for (let index = 0; index < (await images.count()); index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => image.evaluate((element) => element.complete && element.naturalWidth > 0))
+      .toBe(true);
+  }
 });
 
 test("theme choice persists and updates browser theme metadata", async ({ page }) => {
@@ -77,7 +80,8 @@ test.describe("mobile navigation", () => {
 
   test("opens, exposes state, and closes with Escape while restoring focus", async ({ page }) => {
     await page.goto("/");
-    const button = page.getByRole("button", { name: "Open navigation menu" });
+    const button = page.locator("#mobile-menu-button");
+    await expect(button).toHaveAttribute("aria-label", "Open navigation menu");
 
     await button.click();
     await expect(button).toHaveAttribute("aria-expanded", "true");
