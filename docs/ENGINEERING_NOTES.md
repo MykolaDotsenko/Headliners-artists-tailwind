@@ -2,56 +2,113 @@
 
 ## Architecture
 
-Headliners is a static campaign experience. The architecture therefore stays deliberately small:
+Headliners is a static campaign experience, so the architecture stays intentionally small:
 
 1. **HTML owns meaning and content.**
-2. **Tailwind owns the general utility layer and reset.**
-3. **`site.css` owns product-specific visual rules and design tokens.**
+2. **`site.css` owns the visual system, responsive layout, and minimal reset.**
+3. **`theme-init.js` resolves theme state before first paint.**
 4. **`app.mjs` owns progressive interaction only.**
-5. **Pure interaction helpers are exported and unit-tested without a DOM dependency.**
+5. **Pure helpers are exported and unit-tested without a DOM dependency.**
 
-A framework would add lifecycle, bundling, and dependency cost without solving a problem the current scope has.
+A framework would add lifecycle, bundling, hydration, and dependency cost without solving a problem required by this scope. Tailwind was removed after the refactor because the final markup no longer used utility classes; retaining it only for historical reasons would increase complexity without value.
 
 ## Accessibility
 
-The UI uses native elements first: anchors for navigation, buttons for actions, `details/summary` for disclosure, `time` for schedule data, and a real form for the newsletter demo.
+Native elements come first: anchors for navigation, buttons for actions, `details/summary` for disclosure, `time` for schedule data, and a real form for the newsletter demo.
 
-Additional behavior includes:
+The interface additionally includes:
 
 - skip link
 - one descriptive `h1`
 - explicit control labels
-- `aria-expanded` on mobile navigation
-- `aria-live` feedback for the form
-- Escape-key menu recovery
+- `aria-expanded` / `aria-controls` for mobile navigation
+- `aria-live` form feedback
+- Escape-key menu recovery with focus restoration
 - visible `:focus-visible` treatment
-- reduced-motion support
-- decorative artist imagery with empty alt text while artist names remain real text
+- reduced-motion behavior
+- decorative image alt handling while artist names remain real text
 
-Automated checks are useful but cannot prove complete accessibility; manual keyboard and screen-reader review remains part of a real release process.
+axe runs in every Playwright browser project against WCAG 2.x A/AA and WCAG 2.2 AA tags. Automated coverage is not presented as a substitute for manual keyboard and screen-reader review.
 
 ## Theme behavior
 
-The site uses the OS theme when no explicit preference exists. Once the visitor toggles the theme, the preference is stored in `localStorage`. Storage access is wrapped in `try/catch` so privacy modes or blocked storage do not break the interface.
+The OS preference is used when no explicit visitor preference exists. The theme bootstrap runs before CSS is painted to avoid an avoidable light/dark flash.
 
-## Performance decisions
+Once the visitor toggles the theme, the choice is persisted in `localStorage`. Storage reads and writes are guarded so restrictive privacy modes do not break the interface. The browser `theme-color` metadata stays synchronized with the active theme.
 
-- no runtime package dependencies
-- no icon font or icon JavaScript
-- system font stack instead of a render-blocking remote font
-- explicit image dimensions to reduce cumulative layout shift
-- artist images use native lazy loading and async decoding
-- JavaScript is loaded as an ES module
-- large media files are never imported into JavaScript
+## Responsive image pipeline
 
-The legacy source photographs are intentionally preserved for the portfolio visual. In a commercial release, the next asset step would be an automated responsive AVIF/WebP pipeline with measured LCP budgets.
+The original multi-megabyte JPEG assets were converted into compact committed WebP source masters.
 
-## Testing strategy
+`scripts/build-images.mjs` deterministically regenerates production variants:
 
-`node:test` covers deterministic helpers such as theme resolution and email validation. The repository quality script checks structural invariants that commonly regress in static projects: metadata, heading count, anchor targets, image attributes, local file references, duplicate IDs, placeholder content, tracked `node_modules`, and OS artifacts.
+- AVIF
+- WebP
+- JPEG fallback
+- width-specific variants for hero and artist cards
 
-CI additionally proves that Tailwind can compile the current source from a locked install.
+The generator enforces a maximum file budget and aggregate responsive-media budget, then writes a machine-readable report under `artifacts/`.
+
+Production markup uses `<picture>`, `srcset`, and `sizes`; offscreen artist imagery uses native lazy loading, while the hero LCP candidate is explicitly prioritized.
+
+Generated production variants are committed as deployable static assets so GitHub Pages does not depend on ephemeral CI output.
+
+## Browser testing
+
+Playwright runs the same application through:
+
+- Chromium
+- Firefox
+- WebKit
+- mobile Chromium
+
+Coverage verifies:
+
+- page structure and media loading
+- persisted theme behavior
+- carousel movement
+- privacy-safe newsletter validation
+- mobile-navigation state and Escape recovery
+- axe accessibility results
+
+Portfolio screenshots are produced by the same browser tooling, making them reproducible evidence rather than manually curated images.
+
+## Performance budgets
+
+`scripts/lighthouse-audit.mjs` runs Lighthouse three times against a local static server and evaluates the representative performance run.
+
+Current gates:
+
+- Performance ≥ 95
+- Accessibility = 100
+- Best Practices ≥ 95
+- SEO = 100
+- LCP ≤ 2.5 s
+- CLS ≤ 0.10
+
+Reports remain inside CI artifacts rather than being uploaded to a public third-party service.
+
+## Repository quality
+
+`scripts/quality.mjs` verifies structural invariants that are easy to regress in static products:
+
+- metadata and language declaration
+- exactly one `h1`
+- skip-link target
+- no inline event handlers or inline script blocks
+- unique IDs
+- valid internal anchors
+- image alt text and explicit dimensions
+- all local `src`, `href`, and `srcset` asset references
+- no placeholder copy
+- no tracked `node_modules` or `.DS_Store`
+- pinned browser/a11y/performance tooling
+- no accidental runtime dependency surface
+
+GitHub Actions additionally performs a full `npm audit --audit-level=high`.
 
 ## Scope honesty
 
-The event, artists, tickets, and newsletter are fictional. The site deliberately does not pretend to have a backend, checkout, database, or subscription service. That keeps the demo honest and makes the code proportionate to the actual product surface.
+The event, artists, prices, ticketing, and newsletter are fictional. The product deliberately does not pretend to have a backend, checkout, database, subscription service, or analytics stack.
+
+That boundary is intentional: the repository demonstrates finishing a small frontend to a high standard without manufacturing unnecessary architecture.

@@ -1,89 +1,138 @@
 # 🎵 Headliners
 
-An accessible, responsive **festival campaign experience** built with semantic HTML, Tailwind CSS, and progressive vanilla JavaScript.
+A production-minded **festival campaign experience** built with semantic HTML, authored CSS, progressive JavaScript, responsive media, and automated browser-quality gates.
 
 **Live demo:** https://mykoladotsenko.github.io/Headliners-artists-tailwind/src/
 
-> Headliners is a fictional festival concept and an engineering case study. It does not sell tickets, process payments, or collect newsletter data.
+> Headliners is a fictional festival concept and engineering case study. It does not sell tickets, process payments, or collect newsletter data.
+
+## Preview
+
+![Headliners desktop experience](./docs/screenshots/headliners-desktop.jpg)
+
+<p align="center">
+  <img src="./docs/screenshots/headliners-mobile.jpg" alt="Headliners mobile experience" width="390" />
+</p>
 
 ## Why this project exists
 
-The original repository started as a Tailwind learning exercise. The current version treats the same idea as a small production-minded frontend: clear conversion paths, semantic navigation, robust interaction states, keyboard support, reduced-motion handling, repository hygiene, and automated quality gates.
+The repository began as a small styling exercise. The current version deliberately turns that limited scope into a rigorous frontend case study: clear information architecture, accessible interaction states, responsive media, performance budgets, cross-browser verification, and a clean dependency surface.
+
+The design goal is **proportionate engineering**. There is no SPA framework, state library, backend, analytics SDK, payment processor, or form service because the product does not need them.
 
 ## Product experience
 
-- responsive festival hero and navigation
+- responsive hero and primary navigation
 - horizontally scrollable artist discovery with explicit controls
 - concise schedule cards optimized for scanning
 - transparent ticket comparison without fake checkout
 - native `<details>` FAQ interaction
 - privacy-safe newsletter demo that sends and stores nothing
 - persistent light/dark preference with system-theme fallback
-- mobile navigation with Escape-key recovery and accurate ARIA state
+- keyboard-recoverable mobile navigation
+- reduced-motion support
 
 ## Engineering highlights
 
-- semantic HTML landmarks and heading hierarchy
-- no framework and no runtime dependency surface
-- progressive vanilla JavaScript split from markup
-- deterministic pure functions covered with Node's built-in test runner
-- lazy-loaded artist media with explicit dimensions to reduce layout shift
-- visible focus treatment and keyboard-accessible controls
-- `prefers-reduced-motion` support
-- no inline event handlers or placeholder UI
-- CI with locked installs, unit tests, source audit, Tailwind build verification, and npm audit
-- repository hygiene: generated dependencies, OS files, and vendored icon libraries are excluded
+- semantic HTML landmarks and native controls first
+- authored CSS with explicit design tokens and a minimal owned reset
+- progressive ES modules with small, focused responsibilities
+- deterministic pure helpers covered by Node's built-in test runner
+- responsive `<picture>` / `srcset` media with AVIF, WebP, and JPEG fallbacks
+- committed production image variants plus reproducible Sharp generation
+- Playwright coverage in Chromium, Firefox, WebKit, and a mobile Chromium profile
+- axe checks against WCAG A/AA and WCAG 2.2 AA tags
+- three-run Lighthouse performance gate
+- deterministic desktop and mobile screenshots captured in CI
+- full development dependency audit
+- repository hygiene guards for generated dependencies and OS artifacts
+
+## Quality budgets
+
+The CI pipeline fails when the representative Lighthouse run falls below:
+
+| Metric | Budget |
+| --- | ---: |
+| Performance | ≥ 95 |
+| Accessibility | 100 |
+| Best Practices | ≥ 95 |
+| SEO | 100 |
+| LCP | ≤ 2.5 s |
+| CLS | ≤ 0.10 |
+
+Automated accessibility checks complement, rather than replace, manual keyboard and assistive-technology review.
 
 ## Stack
 
 - HTML5
-- Tailwind CSS 3.4
-- authored CSS for product-specific components and design tokens
+- modern authored CSS
 - JavaScript ES modules
-- Node.js 20+ for tooling and tests
+- Node.js 20+ for tooling
+- Sharp for deterministic responsive-image generation
+- Playwright + axe for browser/accessibility verification
+- Lighthouse 13.5 for performance auditing
 - GitHub Actions
+
+There are **no runtime npm dependencies**.
 
 ## Local development
 
 ```bash
 npm ci
+npm run assets:build
 npm run check
-npm run dev:css
+npx playwright install
+npm run test:browser
+npm run lighthouse
 ```
 
-Open `src/index.html` with a static file server while the Tailwind watcher is running.
+Serve `src/` with any static HTTP server while developing.
 
-## Quality commands
+## Commands
 
 | Command | Purpose |
 | --- | --- |
-| `npm test` | Runs deterministic unit tests with `node:test`. |
-| `npm run quality` | Checks semantic/document invariants and Git hygiene. |
-| `npm run build:verify` | Confirms Tailwind can compile the current source. |
-| `npm run check` | Runs the complete local quality gate. |
-| `npm run build:css` | Rebuilds the committed Tailwind stylesheet. |
+| `npm run assets:build` | Rebuild responsive AVIF/WebP/JPEG media and enforce image budgets. |
+| `npm test` | Run deterministic unit tests with `node:test`. |
+| `npm run quality` | Validate document invariants, local assets, dependency pins, and Git hygiene. |
+| `npm run test:browser` | Run interaction and axe tests across Chromium, Firefox, WebKit, and mobile Chromium. |
+| `npm run screenshots` | Capture deterministic portfolio screenshots. |
+| `npm run lighthouse` | Run three Lighthouse audits and enforce performance budgets. |
+| `npm run check` | Run the fast deterministic local gate. |
+| `npm run check:full` | Run the complete assets + unit + browser + Lighthouse quality suite. |
 
 ## Structure
 
 ```text
 .
 ├── .github/workflows/quality.yml
-├── docs/ENGINEERING_NOTES.md
-├── scripts/quality.mjs
+├── docs/
+│   ├── ENGINEERING_NOTES.md
+│   └── screenshots/
+├── e2e/
+│   ├── accessibility.spec.mjs
+│   ├── app.spec.mjs
+│   └── screenshots.spec.mjs
+├── scripts/
+│   ├── build-images.mjs
+│   ├── lighthouse-audit.mjs
+│   └── quality.mjs
 ├── src/
 │   ├── app.mjs
 │   ├── assets/
+│   │   ├── optimized/
+│   │   └── source/
+│   ├── favicon.svg
 │   ├── index.html
-│   ├── input.css
-│   ├── output.css
-│   └── site.css
+│   ├── site.css
+│   └── theme-init.js
 ├── tests/app.test.mjs
-├── package.json
-└── tailwind.config.js
+├── package-lock.json
+└── package.json
 ```
 
-## Design constraints
+## Scope honesty
 
-This remains intentionally small. There is no SPA router, state library, backend, analytics SDK, form service, or payment integration because none is required by the product scope. The goal is to demonstrate proportionate engineering: the simplest architecture that still handles accessibility, interaction state, failure-resistant preferences, responsive behavior, and maintainability well.
+The event, lineup, prices, ticketing, and newsletter are fictional. The interface intentionally avoids implying backend capabilities that do not exist.
 
-More detail: [Engineering notes](./docs/ENGINEERING_NOTES.md).
+For architecture, accessibility, performance, and testing trade-offs, see [Engineering notes](./docs/ENGINEERING_NOTES.md).

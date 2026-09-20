@@ -11,7 +11,7 @@ const check = (condition, message) => {
   if (!condition) failures.push(message);
 };
 
-check(/<html\s+lang="en"/i.test(html), "Document must declare lang=\"en\".");
+check(/<html\s+lang="en"/i.test(html), 'Document must declare lang="en".');
 check(/<title>[^<]+<\/title>/i.test(html), "Document must have a non-empty title.");
 check(
   /<meta\s+name="description"\s+content="[^"]+"/i.test(html),
@@ -26,6 +26,7 @@ check(
 );
 check(!html.includes("some button"), "Placeholder UI must not ship.");
 check(!/Expirience|\bdont\b/i.test(html), "Known copy regressions must not ship.");
+check(!html.includes("\\n"), "Literal escaped newlines must not leak into rendered markup.");
 
 const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
 check(new Set(ids).size === ids.length, "All HTML ids must be unique.");
@@ -40,10 +41,28 @@ for (const image of html.matchAll(/<img\b[^>]*>/gi)) {
   check(/\sheight="\d+"/i.test(image[0]), `Image is missing height: ${image[0]}`);
 }
 
+const localAssets = new Set();
+
 for (const match of html.matchAll(/(?:src|href)="(\.\/[^"#?]+)"/g)) {
-  const path = resolve(root, "src", match[1].replace(/^\.\//, ""));
-  check(existsSync(path), `Referenced local asset does not exist: ${match[1]}`);
+  localAssets.add(match[1]);
 }
+
+for (const match of html.matchAll(/srcset="([^"]+)"/g)) {
+  for (const candidate of match[1].split(",")) {
+    const path = candidate.trim().split(/\s+/)[0];
+    if (path?.startsWith("./")) localAssets.add(path);
+  }
+}
+
+for (const asset of localAssets) {
+  const path = resolve(root, "src", asset.replace(/^\.\//, ""));
+  check(existsSync(path), `Referenced local asset does not exist: ${asset}`);
+}
+
+check(
+  ![...localAssets].some((asset) => /assets\/images\/(?:band\d|hero)\.jpg$/.test(asset)),
+  "Production markup must not reference legacy source JPEGs.",
+);
 
 const trackedFiles = execFileSync("git", ["ls-files"], {
   cwd: root,
@@ -61,6 +80,10 @@ check(
   !trackedFiles.some((path) => path.endsWith(".DS_Store")),
   ".DS_Store files must never be tracked.",
 );
+check(
+  !trackedFiles.some((path) => /^src\/assets\/images\/(?:band\d|hero)\.jpg$/.test(path)),
+  "Legacy multi-megabyte JPEG sources must not remain tracked after media migration.",
+);
 
 check(
   packageJson.name === "headliners-festival-experience",
@@ -74,7 +97,7 @@ check(
 );
 check(
   !packageJson.dependencies || Object.keys(packageJson.dependencies).length === 0,
-  "Static site must not ship unused runtime dependencies.",
+  "Static site must not ship runtime npm dependencies.",
 );
 check(
   packageJson.devDependencies?.["@playwright/test"] === "1.63.0",
@@ -110,5 +133,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Quality audit passed: ${ids.length} ids, ${trackedFiles.length} tracked files, semantic and repository checks clean.`,
+  `Quality audit passed: ${ids.length} ids, ${localAssets.size} local asset references, ${trackedFiles.length} tracked files.`,
 );
